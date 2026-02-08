@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import { StyleSheet, TouchableOpacity, ViewStyle, StyleProp, TouchableOpacityProps, TextStyle } from "react-native";
+import { COLORS } from "@constants/colors";
 import Typography, { TypographyVariant } from "./Typography";
 
 interface ButtonProps extends TouchableOpacityProps {
@@ -16,17 +17,19 @@ interface ButtonProps extends TouchableOpacityProps {
 const Button = ({
   label,
   disabled = false,
-  backgroundColor = "#007AFF",
-  textColor = "#FFFFFF",
+  backgroundColor = COLORS.background.accent,
+  textColor = COLORS.text.inverse,
   textVariant = "label",
   outline = false,
   style,
   textStyle = {},
   ...props
 }: ButtonProps) => {
-  const buttonColor = disabled ? "#C4C4C4" : backgroundColor;
+  const buttonColor = disabled ? COLORS.background.disabled : backgroundColor;
   const borderStyle = outline ? { borderWidth: 1.5, borderColor: textColor } : null;
-  const bgColorStyle = { backgroundColor: outline ? "transparent" : buttonColor };
+  const bgColorStyle = {
+    backgroundColor: outline ? COLORS.background.transparent : buttonColor,
+  };
 
   return (
     <TouchableOpacity

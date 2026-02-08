@@ -6,6 +6,7 @@ import {
   StyleSheet,
   View,
 } from "react-native";
+import { COLORS } from "@constants/colors";
 
 import Typography from "@components/Typography";
 import { Transaction, TransactionSection } from "./types";
@@ -16,13 +17,14 @@ type TransactionListProps = {
   isLoading?: boolean;
   onLoadMore?: () => void;
   onRefresh?: () => void;
+  onTransactionPress?: (id: string) => void;
 };
 
-const TransactionList = ({ data, isLoading = false, onLoadMore, onRefresh }: TransactionListProps) => {
+const TransactionList = ({ data, isLoading = false, onLoadMore, onRefresh, onTransactionPress }: TransactionListProps) => {
   const renderItem: SectionListRenderItem<Transaction, TransactionSection> =
     useCallback(({ item }) => {
-      return <TransactionCard key={item.id} data={item} />;
-    }, []);
+      return <TransactionCard key={item.id} data={item} onPress={onTransactionPress} />;
+    }, [onTransactionPress]);
 
   const renderSectionHeader = useCallback(
     ({ section }: { section: SectionListData<Transaction, TransactionSection> }) => {
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   sectionHeaderContainer: {
-    backgroundColor: "#F8F9FB",
+    backgroundColor: COLORS.background.section,
     paddingVertical: 10,
     paddingHorizontal: 16,
     flexDirection: "row",
@@ -71,12 +73,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     elevation: 0,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: "#E5E7EB",
+    borderBottomColor: COLORS.border.default,
   },
   sectionHeaderText: {
     fontSize: 13,
     fontWeight: "700",
-    color: "#6B7280",
+    color: COLORS.text.secondary,
     letterSpacing: 1.2,
     textTransform: "uppercase",
   },

@@ -6,6 +6,7 @@ import {
   type TextProps,
   type TextStyle,
 } from "react-native";
+import { COLORS } from "@constants/colors";
 
 type TypographyVariant = "title" | "label" | "body" | "caption";
 
@@ -15,13 +16,11 @@ interface TypographyProps extends TextProps {
   weight?: TextStyle["fontWeight"];
   style?: StyleProp<TextStyle>;
   children: ReactNode;
-}
-
-const BASE_COLOR = "#111827";
+};
 
 const Typography = ({
   variant = "body",
-  color = BASE_COLOR,
+  color = COLORS.text.primary,
   weight,
   style,
   children,

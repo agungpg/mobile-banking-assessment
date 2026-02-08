@@ -3,12 +3,17 @@ import { StyleSheet, View } from "react-native";
 import moment from "moment";
 
 import Typography from "@components/Typography";
+import { COLORS } from "@constants/colors";
 import { TITLE_DATE_FORMAT, TRANSACTION_FILTER_TABS } from "@constants/transactions";
 import TransactionFilter from "@features/transactions/TransactionFilter";
 import TransactionList from "@features/transactions/TransactionList";
 import type { Transaction, TransactionSection } from "@features/transactions/types";
 import useTransactions from "@services/transactions/useTransactions";
 import { RawTransaction, TransactionTypeEnum } from "app/types/transaction";
+import { useNavigation, type NavigationProp } from "@react-navigation/native";
+import { AppRoutes } from "@navigations/AppNavigation";
+import  { AppNavigationParams } from "@navigations/AppNavigation";
+import useTransactionStore from "@stores/transactions";
 
 
 const mapTransaction = (transaction: RawTransaction): Transaction => {
@@ -59,7 +64,6 @@ const getHydratedData = (transactions: RawTransaction[]) => {
 const getTransactionTypeIndex = (type: string) => {
   return TRANSACTION_FILTER_TABS.findIndex((tab) => tab.id === type);
 };
-
 const TransactionListScreen = () => {
   const {
     data,
@@ -69,6 +73,8 @@ const TransactionListScreen = () => {
     changeTransactionType,
     filterType,
   } = useTransactions();
+  const { selectTransaction } = useTransactionStore();
+  const {navigate} = useNavigation<NavigationProp<AppNavigationParams>>();
 
   const hydratedData = useMemo(() => {
     return getHydratedData(data);
@@ -85,13 +91,19 @@ const TransactionListScreen = () => {
     return getTransactionTypeIndex(filterType || TransactionTypeEnum.ALL);
   }, [filterType]);
 
+  const onTransactionPress = useCallback((transactionId: string) => {
+    // Navigate to the transaction details screen
+    selectTransaction(transactionId);
+    navigate(AppRoutes.TransactionDetail);
+  }, [navigate, selectTransaction]);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Typography variant="title">Transactions</Typography>
         <TransactionFilter activeTabIndex={activeTabIndex} onTransactionTypeChange={onTransactionTypeChange} />
       </View>
-      <TransactionList isLoading={isLoading} onLoadMore={onLoadMore} onRefresh={onRefresh} data={hydratedData} />
+      <TransactionList isLoading={isLoading} onLoadMore={onLoadMore} onRefresh={onRefresh} data={hydratedData} onTransactionPress={onTransactionPress} />
     </View>
   );
 };
@@ -100,11 +112,13 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     paddingHorizontal: 12,
-    backgroundColor: "#F9FAFB",
-    flex: 1 
+    backgroundColor: COLORS.background.screen,
+    flex: 1,
+    paddingTop: 24,
   },
   header: {
-    paddingVertical: 16,
+    paddingBottom: 4,
+    gap: 4,
   },
 });
 

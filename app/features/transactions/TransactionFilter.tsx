@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { StyleSheet, View } from "react-native";
+import { COLORS } from "@constants/colors";
 
 import Tabs from "@components/Tabs";
 import { TRANSACTION_FILTER_TABS } from "@constants/transactions";
@@ -27,7 +28,7 @@ const TransactionFilter = ({
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    backgroundColor: "#F9FAFB",
+    backgroundColor: COLORS.background.screen,
   },
 });
 

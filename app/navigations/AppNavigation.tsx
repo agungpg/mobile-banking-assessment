@@ -5,7 +5,7 @@ import TransactionListDetailScreen from "@screens/transaction-detail";
 
 export type AppNavigationParams = {
   Transactions: undefined;
-  TransactionDetail: {id:string}
+  TransactionDetail: undefined;
 };
 
 export const AppRoutes = {

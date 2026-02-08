@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { ScrollView, StyleSheet } from "react-native";
+import { COLORS } from "@constants/colors";
 
 import Button from "./Button";
 
@@ -14,21 +15,16 @@ type TabsProps = {
   onTabChange: (tabIndex: number) => void;
 };
 
-const ACTIVE_TEXT_COLOR = "#FFFFFF";
-const INACTIVE_TEXT_COLOR = "#4B5563";
-const ACTIVE_BACKGROUND_COLOR = "#111827";
-const INACTIVE_BACKGROUND_COLOR = "#E5E7EB";
-
 const Tabs = ({ list, activeTabIndex = 0, onTabChange }: TabsProps) => {
   return (
     <ScrollView horizontal contentContainerStyle={styles.container}>
       {list.map((tab, index) => {
         const isActive = activeTabIndex === index;
         const textStyle = isActive ? styles.labelActive : styles.label;
-        const textColor = isActive ? ACTIVE_TEXT_COLOR : INACTIVE_TEXT_COLOR;
+        const textColor = isActive ? COLORS.text.inverse : COLORS.text.tertiary;
         const backgroundColor = isActive
-          ? ACTIVE_BACKGROUND_COLOR
-          : INACTIVE_BACKGROUND_COLOR;
+          ? COLORS.text.primary
+          : COLORS.border.default;
 
         return (
           <Button
