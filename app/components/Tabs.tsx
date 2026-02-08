@@ -11,7 +11,7 @@ type TabItem = {
 type TabsProps = {
   list: TabItem[];
   activeTabIndex: number;
-  onTabChange?: (tabIndex: number) => void;
+  onTabChange: (tabIndex: number) => void;
 };
 
 const ACTIVE_TEXT_COLOR = "#FFFFFF";

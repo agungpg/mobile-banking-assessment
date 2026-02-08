@@ -8,19 +8,17 @@ import {
 } from "react-native";
 
 import Typography from "@components/Typography";
-import { Transaction } from "./types";
+import { Transaction, TransactionSection } from "./types";
 import TransactionCard from "./TransactionCard";
-
-type TransactionSection = {
-  title: string;
-  data: Transaction[];
-};
 
 type TransactionListProps = {
   data: TransactionSection[];
+  isLoading?: boolean;
+  onLoadMore?: () => void;
+  onRefresh?: () => void;
 };
 
-const TransactionList = ({ data }: TransactionListProps) => {
+const TransactionList = ({ data, isLoading = false, onLoadMore, onRefresh }: TransactionListProps) => {
   const renderItem: SectionListRenderItem<Transaction, TransactionSection> =
     useCallback(({ item }) => {
       return <TransactionCard key={item.id} data={item} />;
@@ -42,6 +40,9 @@ const TransactionList = ({ data }: TransactionListProps) => {
   return (
     <View style={styles.container}>
       <SectionList
+        onEndReached={onLoadMore}
+        onRefresh={onRefresh}
+        refreshing={isLoading}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}

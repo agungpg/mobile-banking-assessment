@@ -1,15 +1,19 @@
+import { TransactionTypeEnum } from "app/types/transaction";
+
+export const TRANSACTION_LIMIT = 20;
+export const TITLE_DATE_FORMAT = "D MMM YYYY";
 
 export const TRANSACTION_FILTER_TABS = [
   {
-    id: "all",
+    id: TransactionTypeEnum.ALL,
     label: "All",
   },
   {
-    id: "money-in",
+    id: TransactionTypeEnum.INCOMING,
     label: "Money In",
   },
   {
-    id: "money-out",
+    id: TransactionTypeEnum.OUTGOING,
     label: "Money Out",
   },
 ];

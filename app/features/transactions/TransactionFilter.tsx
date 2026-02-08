@@ -4,10 +4,22 @@ import { StyleSheet, View } from "react-native";
 import Tabs from "@components/Tabs";
 import { TRANSACTION_FILTER_TABS } from "@constants/transactions";
 
-const TransactionFilter = () => {
+type TransactionFilterProps = {
+  onTransactionTypeChange: (tabIndex: number) => void;
+  activeTabIndex?: number;
+};
+
+const TransactionFilter = ({
+  onTransactionTypeChange,
+  activeTabIndex = 0,
+}: TransactionFilterProps) => {
   return (
     <View style={styles.container}>
-      <Tabs list={TRANSACTION_FILTER_TABS} activeTabIndex={0} />
+      <Tabs
+        list={TRANSACTION_FILTER_TABS}
+        activeTabIndex={activeTabIndex}
+        onTabChange={onTransactionTypeChange}
+      />
     </View>
   );
 };

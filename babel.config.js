@@ -10,7 +10,7 @@ module.exports = {
           '@screens': './app/screens',
           '@components': './app/components',
           '@services': './app/services',
-          '@store': './app/store',
+          '@stores': './app/stores',
           '@features': './app/features',
           '@navigations': './app/navigations',
           '@constants': './app/constants',

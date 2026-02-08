@@ -4,3 +4,8 @@ export type Transaction = {
   recipient: string;
   amount: number;
 };
+
+export type TransactionSection = {
+  title: string;
+  data: Transaction[];
+};

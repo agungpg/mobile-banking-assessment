@@ -6,7 +6,7 @@
     "paths": {
       "@screens/*": ["app/screens/*"],
       "@components/*": ["app/components/*"],
-      "@store/*": ["app/store/*"],
+      "@stores/*": ["app/stores/*"],
       "@services/*": ["app/services/*"],
       "@features/*": ["app/features/*"],
       "@navigations/*": ["app/navigations/*"],
