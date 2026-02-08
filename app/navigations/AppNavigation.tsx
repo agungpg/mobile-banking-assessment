@@ -1,23 +1,23 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import TransactionListScreen from "../screens/transaction-list";
-import TransactionListDetailScreen from "../screens/transaction-list";
+import TransactionsScreen from "@screens/transactions";
+import TransactionListDetailScreen from "@screens/transaction-detail";
 
 export type AppNavigationParams = {
-  TransactionList: undefined;
+  Transactions: undefined;
   TransactionDetail: {id:string}
 };
 
 export const AppRoutes = {
-  TransactionList: "TransactionList",
+  Transactions: "Transactions",
   TransactionDetail: "TransactionDetail",
 } as const;
 
 const Stack = createNativeStackNavigator<AppNavigationParams>();
 
 const AppNavigation = () => (
-  <Stack.Navigator initialRouteName={AppRoutes.TransactionList} screenOptions={{ headerShown: false }}>
-    <Stack.Screen name={AppRoutes.TransactionList} component={TransactionListScreen} />
+  <Stack.Navigator initialRouteName={AppRoutes.Transactions} screenOptions={{ headerShown: false }}>
+    <Stack.Screen name={AppRoutes.Transactions} component={TransactionsScreen} />
     <Stack.Screen name={AppRoutes.TransactionDetail} component={TransactionListDetailScreen} />
   </Stack.Navigator>
 );
