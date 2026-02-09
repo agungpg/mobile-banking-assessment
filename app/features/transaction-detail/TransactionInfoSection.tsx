@@ -18,7 +18,7 @@ const TransactionInfoSection = ({
 }: TransactionInfoSectionProps) => {
   return (
     <>
-      <Typography variant="label" style={styles.sectionLabel}>
+      <Typography color={COLORS.text.secondary} style={styles.sectionLabel}>
         TRANSACTION INFORMATION
       </Typography>
       <View style={styles.infoContent}>
@@ -35,11 +35,10 @@ const TransactionInfoSection = ({
 const styles = StyleSheet.create({
   sectionLabel: {
     paddingHorizontal: 16,
-    paddingTop: 24,
+    paddingTop: 16,
     paddingBottom: 8,
     fontWeight: "700",
     fontSize: 12,
-    color: COLORS.text.secondary,
   },
   infoContent: {
     backgroundColor: COLORS.background.primary,
